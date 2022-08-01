@@ -2,6 +2,8 @@
 
 A linux software to choose browser on a per link basis.  
   
+  Features include Open a link in all browsers at once, expand a shortened URL before browsing it.
+  
 ![screenshot](https://github.com/visnkmr/perlink/raw/main/perlink_scr.png)
   
 All browsers are opened using shell commands.  
