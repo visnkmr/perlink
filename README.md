@@ -1,6 +1,10 @@
 # perlink
 
-A software to choose browser on a per link basis. All browsers are opened using command line arguments.
+A software to choose browser on a per link basis.  
+All browsers are opened using command line arguments.  
+  
+Made using Rust with fltk frontend.
+
 |Browser-name| command|
 |-|-|
 |Firefox| firefox|
