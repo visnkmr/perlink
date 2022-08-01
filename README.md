@@ -1,11 +1,13 @@
 # perlink
 
 A software to choose browser on a per link basis. All browsers are opened using command line arguments.
-Firefox: firefox
-Vivaldi Stable : vivaldi-stable
-Chromium: chromium
-Firefox beta: firefox-beta
-Firefox dev: firefox-dev
+|Browser-name| command|
+|-|-|
+|Firefox| firefox|
+|Vivaldi Stable | vivaldi-stable|
+|Chromium| chromium|
+|Firefox beta|firefox-beta|
+|Firefox dev|firefox-dev|
 
 In order to link your already installed browser to a particular command if not already there:
 ```
