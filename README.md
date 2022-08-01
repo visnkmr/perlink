@@ -1,10 +1,10 @@
 # perlink
 
-A software to choose browser on a per link basis.  
+A linux software to choose browser on a per link basis.  
   
 ![screenshot](https://github.com/visnkmr/perlink/raw/main/perlink_scr.png)
   
-All browsers are opened using command line arguments.  
+All browsers are opened using shell commands.  
   
 Made using Rust with fltk frontend.
 
