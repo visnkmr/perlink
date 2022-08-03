@@ -18,6 +18,18 @@ Made using Rust with fltk frontend.
 |Firefox beta|firefox-beta|
 |Firefox dev|firefox-dev|
 
+Config file now stored @ 
+```
+/home/<username>/.config/perlink/prefs.prefs.json  
+```  
+  
+Modify it will reflect in the window options.  
+Allowing you to pratically add to perlink any browser/software that can be launched via command line.
+the contents of the file are in the format 
+```
+"name of button":"command to execute"
+```
+  
 In order to link your already installed browser to a particular command if not already there:
 ```
 touch firefox-beta
@@ -40,6 +52,8 @@ $PATH
 ```
 mv firefox-beta /destination/
 ```
+
+
 
 Now running firefox-beta in terminal will open the browser you set up in the previous step
 
