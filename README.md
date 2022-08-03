@@ -1,6 +1,8 @@
 # perlink
 
-A linux software to choose browser on a per link basis.  
+A software to choose browser on a per link basis.  
+  
+Tested to work on linux.
   
   Features include Open a link in all browsers at once, expand a shortened URL before browsing it.
   
