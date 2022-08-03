@@ -1,6 +1,6 @@
 # perlink
 
-A software to choose browser on a per link basis.  
+Software Utility to choose browser on a per link basis.  
   
 Tested to work on linux.
   
