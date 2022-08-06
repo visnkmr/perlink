@@ -29,7 +29,7 @@ All browsers are opened using shell commands.
 Config file now stored @ 
 ```
 Linux: /home/<username>/.config/perlink/config.json  
-Windows: Drive:/Users/username/AppData/Roaming/perlink/
+Windows: Drive:\Users\username\AppData\Roaming\perlink\config.json
 ```  
   
 Modifying the config file will reflect in the window options.  
@@ -41,8 +41,8 @@ the contents of the config file are in the format
 
 In order add a button for your already installed browser just open config file and append this to config file before }}
 ```
-Linux: "browsername":"exec //path//to//your//browser//executable//browserexecutablename"
-Windows: "browsername":"Drive://path//to//your//browser//executable//browserexecutablename"
+Linux: "browsername":"exec //path//to//your//browser//executable"
+Windows: "browsername":"Drive:\\path\\to\\your\\browser\\executable"
 ```
 You can check the [sample config](https://github.com/visnkmr/perlink/blob/main/sample-config.json) for a working implementation.
 
