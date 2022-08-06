@@ -6,6 +6,10 @@ Tested to work on
 ✔️ Manjaro XFCE (Linux, based on Arch)  
 ✔️ Windows 11.
   
+## Setup:
+1. Download the executable from the releases page.
+2. Set the downloaded executable as default browser on your device.
+  
   Features include Open a link in all browsers at once, expand a shortened URL before browsing it.
   
 ![screenshot](https://github.com/visnkmr/perlink/raw/main/perlink_scr.png)
