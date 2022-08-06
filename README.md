@@ -31,7 +31,7 @@ the contents of the file are in the format
 ```
 "name of button":"command to execute"
 ```
-```
+
 In order add a button for your already installed browser just open config file and append this to config file before }}
 ```
 "browsername":"exec //path//to//your//browser//executable//browserexecutablename"
