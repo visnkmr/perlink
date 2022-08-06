@@ -6,7 +6,7 @@ Tested to work on
 ✔️ Manjaro XFCE (Linux, based on Arch)  
 ✔️ Windows 11.
   
-## Setup:
+#### Setup:
 1. Download the executable from the releases page.
 2. Set the downloaded executable as default browser on your device.
   
@@ -41,7 +41,8 @@ the contents of the config file are in the format
 
 In order add a button for your already installed browser just open config file and append this to config file before }}
 ```
-"browsername":"exec //path//to//your//browser//executable//browserexecutablename"
+Linux: "browsername":"exec //path//to//your//browser//executable//browserexecutablename"
+Windows: "browsername":"Drive://path//to//your//browser//executable//browserexecutablename"
 ```
 You can check the [sample config](https://github.com/visnkmr/perlink/blob/main/sample-config.json) for a working implementation.
 
