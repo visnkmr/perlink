@@ -36,5 +36,5 @@ In order add a button for your already installed browser just open config file a
 ```
 "browsername":"exec //path//to//your//browser//executable//browserexecutablename"
 ```
-You can check the sample config for a working implementation.
+You can check the [sample config](https://github.com/visnkmr/perlink/blob/main/sample-config.json) for a working implementation.
 
