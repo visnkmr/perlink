@@ -2,7 +2,7 @@
 
 Software Utility to choose browser on a per link basis.  
   
-Tested to work on linux.
+Tested to work on Manjaro XFCE (Linux, based on Arch), Windows 11.
   
   Features include Open a link in all browsers at once, expand a shortened URL before browsing it.
   
