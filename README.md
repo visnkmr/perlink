@@ -2,7 +2,9 @@
 
 Software Utility to choose browser on a per link basis.  
   
-Tested to work on Manjaro XFCE (Linux, based on Arch), Windows 11.
+Tested to work on  
+✔️ Manjaro XFCE (Linux, based on Arch)  
+✔️ Windows 11.
   
   Features include Open a link in all browsers at once, expand a shortened URL before browsing it.
   
@@ -10,7 +12,7 @@ Tested to work on Manjaro XFCE (Linux, based on Arch), Windows 11.
   
 All browsers are opened using shell commands.  
   
-Made using Rust with fltk frontend.
+🛠️ Rust with fltk frontend.
 
 |Browser-name| command|
 |-|-|
@@ -26,9 +28,9 @@ Linux: /home/<username>/.config/perlink/config.json
 Windows: Drive:/Users/username/AppData/Roaming/perlink/
 ```  
   
-Modify it will reflect in the window options.  
+Modifying the config file will reflect in the window options.  
 Allowing you to pratically add to perlink any browser/software that can be launched via command line.
-the contents of the file are in the format 
+the contents of the config file are in the format 
 ```
 "name of button":"command to execute"
 ```
