@@ -22,7 +22,7 @@ Made using Rust with fltk frontend.
 
 Config file now stored @ 
 ```
-/home/<username>/.config/perlink/prefs.prefs.json  
+/home/<username>/.config/perlink/config.json  
 ```  
   
 Modify it will reflect in the window options.  
@@ -31,31 +31,10 @@ the contents of the file are in the format
 ```
 "name of button":"command to execute"
 ```
-  
-In order to link your already installed browser to a particular command if not already there:
 ```
-touch firefox-beta
-nano firefox-beta
+In order add a button for your already installed browser just open config file and append this to config file before }}
 ```
-paste in shell
-
-```shell
-#!/bin/sh
-exec /path/to/your/browser/executable/browserexecutablename "$@"
+"browsername":"exec //path//to//your//browser//executable//browserexecutablename"
 ```
-save and then
-```
-chmod 777 firefox-beta
-```
-then move to any one of the folders listed in
-```
-$PATH
-```
-```
-mv firefox-beta /destination/
-```
-
-
-
-Now running firefox-beta in terminal will open the browser you set up in the previous step
+You can check the sample config for a working implementation.
 
