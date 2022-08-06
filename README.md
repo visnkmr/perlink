@@ -22,7 +22,8 @@ Made using Rust with fltk frontend.
 
 Config file now stored @ 
 ```
-/home/<username>/.config/perlink/config.json  
+Linux: /home/<username>/.config/perlink/config.json  
+Windows: Drive:/Users/username/AppData/Roaming/perlink/
 ```  
   
 Modify it will reflect in the window options.  
