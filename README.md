@@ -45,8 +45,8 @@ the contents of the config file are in the format
 
 In order add a button for your already installed browser just open config file and append this to config file before }}
 ```
-Linux: "browsername":"//path//to//your//browser//executable"
-Windows: "browsername":"Drive:\\path\\to\\your\\browser\\executable"
+Linux: "browsername":"/path/to/your/browser/executable"
+Windows: "browsername":"Drive:/path/to/your/browser/executable"
 ```
 You can check the [sample config](https://github.com/visnkmr/perlink/blob/main/sample-config.json) for a working implementation.
 
