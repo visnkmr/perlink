@@ -49,4 +49,8 @@ Linux: "browsername":"/path/to/your/browser/executable"
 Windows: "browsername":"Drive:/path/to/your/browser/executable"
 ```
 You can check the [sample config](https://github.com/visnkmr/perlink/blob/main/sample-config.json) for a working implementation.
-
+  
+  
+## Can be used:  
+1. by Web developer to open website in all browsers with one click.  
+2. to Open an already open browser window in another browser window using full link as title extension and our app, or ,Copy a link and open perlink to choose a browser to open the link in.
