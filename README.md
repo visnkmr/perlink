@@ -32,8 +32,8 @@ All browsers are opened using shell commands.
 
 Config file now stored @ 
 ```
-Linux: /home/<username>/.config/perlink/config.json  
-Windows: Drive:\Users\username\AppData\Roaming\perlink\config.json
+Linux: /home/<username>/.config/perlink/config.toml  
+Windows: Drive:\Users\username\AppData\Roaming\perlink\config.toml
 ```  
   
 Modifying the config file will reflect in the window options.  
