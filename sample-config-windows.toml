@@ -1,0 +1,2 @@
+shortenusing = "https://unshorten.me/s/"
+user_data = [["firefox":"V:/Firefox/firefox.exe"], ["chromium", "chromium"], ["waterfox", "V:/installs/Waterfox/waterfox.exe"], ["vivaldi stable", "vivaldi-stable"], ["firefox dev", "firefox-dev"], ["firefox beta", "firefox-beta"]]
