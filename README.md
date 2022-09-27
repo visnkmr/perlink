@@ -14,7 +14,7 @@ Tested to work on
   1. Open a link in all browsers at once,  
   2. expand a shortened URL before browsing it using any service of your choice, configurable in the config file mentioned below.  
   3. You can also Copy url to clipboard and open the app to select browser to open the url in. 
-  4. You can use an extension in your browser to show url in window title and then open the app to select browser to open the any of the open window url in.
+  4. You can use an extension in your browser to show url in window title and then open the app to select browser to open any of the open window url in.
   
 ![screenshot](https://github.com/visnkmr/perlink/raw/main/perlink_scr.png)
   
