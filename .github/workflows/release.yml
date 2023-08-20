@@ -13,7 +13,7 @@ concurrency:
 
 env:
   NAME: perlink
-  DESC: A simple onscreenremote for PC with some basic controls
+  DESC: choose browser on a perlink basis
 
 jobs:
   build:
@@ -22,8 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # os: [ubuntu-latest, macos-latest]
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -55,21 +54,21 @@ jobs:
       - name: Get Variables (Windows)
         run: |
           echo "$env:GITHUB_ENV"
-          echo ("TAG=" + $env:GITHUB_REF.replace('refs/tags/', '')) >> $env:GITHUB_ENV
+          echo ("TAG=" + $env:GITHUB_REF.replace('refs/heads/', '')) >> $env:GITHUB_ENV
           echo "CLI_PATH=perlink.exe" >> $env:GITHUB_ENV
           echo "OS=Windows" >> $env:GITHUB_ENV
         if: matrix.os == 'windows-latest'
 
       - name: Get Variables (MacOS)
         run: |
-          echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+          echo "TAG=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
           echo "CLI_PATH=perlink" >> $GITHUB_ENV
           echo "OS=MacOS" >> $GITHUB_ENV
         if: matrix.os == 'macos-latest'
 
       - name: Get Variables (Linux)
         run: |
-          echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+          echo "TAG=$(echo $GITHUB_REF | sed 's/^refs\/heads\///')" >> $GITHUB_ENV
           echo "CLI_PATH=perlink" >> $GITHUB_ENV
           echo "OS=Linux-GNU" >> $GITHUB_ENV
         if: matrix.os == 'ubuntu-latest'
@@ -87,15 +86,22 @@ jobs:
           file: target/release/${{ env.CLI_PATH }}
           tag: ${{ github.ref }}
           overwrite: true
-          asset_name: perlink-${{ env.OS }}-x86_64
+          asset_name: perlink-${{ env.TAG }}-${{ env.OS }}-x86_64
   build-deb:
+    permissions:
+      contents: write
     needs: build
     # if: github.event_name == 'release'
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
 
+      - uses: actions/checkout@v3
+      - name: Get Variables (Linux)
+        run: |
+          echo "TAG=$(echo $GITHUB_REF | sed 's/^refs\/heads\///')" >> $GITHUB_ENV
+          echo "CLI_PATH=perlink" >> $GITHUB_ENV
+          echo "OS=Linux-GNU" >> $GITHUB_ENV
       - name: Download Artifact
         uses: actions/download-artifact@v3
         with:
@@ -115,7 +121,7 @@ jobs:
           package: ${{ env.NAME }}
           package_root: .debpkg
           maintainer: visnkmr
-          version: ${{ github.ref }}
+          version: ${{ env.TAG }}
           arch: "amd64"
           desc: "${{ env.DESC }}"
 
@@ -126,7 +132,7 @@ jobs:
           package: ${{ env.NAME }}
           package_root: .rpmpkg
           maintainer: visnkmr
-          version: ${{ github.ref }}
+          version: ${{ env.TAG }}
           arch: "x86_64"
           desc: "${{ env.DESC }}"
 
