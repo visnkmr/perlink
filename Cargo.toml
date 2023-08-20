@@ -1,8 +1,19 @@
 [package]
 name = "perlink"
 version = "0.8.0"
+description = "choose browser on a per link basis."
+authors = ["visnk"]
+license = ""
+repository = "https://github.com/visnkmr/perlink"
 edition = "2021"
 
+
+
+[profile.release]
+strip = true  # Automatically strip symbols from the binary.
+opt-level = "z"
+lto = true
+panic = "abort"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
