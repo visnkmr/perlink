@@ -1,0 +1,152 @@
+name: Build CLI Binary
+
+on:
+  push:
+  pull_request:
+  release:
+    types:
+      - published
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.event_name == 'release' }}
+  cancel-in-progress: true
+
+env:
+  NAME: perlink
+  DESC: A simple onscreenremote for PC with some basic controls
+
+jobs:
+  build:
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        # os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+            sudo apt-get update
+            sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev patchelf libpango1.0-dev libatk1.0-dev libglib2.0-dev libgdk-pixbuf2.0-dev librust-gdk-sys-dev
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+      - name: Install Dependencies
+        run: |
+            sudo chown -R $(whoami) $(brew --prefix)/*
+            brew install pkg-config pango gtk+4 libadwaita gstreamer
+        if: ${{ matrix.os == 'macos-latest' }}
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Rust Dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          key: ${{ matrix.os }}
+
+      - name: Build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release -p perlink
+
+      # Windows scripting isn't the same.
+      - name: Get Variables (Windows)
+        run: |
+          echo "$env:GITHUB_ENV"
+          echo ("TAG=" + $env:GITHUB_REF.replace('refs/tags/', '')) >> $env:GITHUB_ENV
+          echo "CLI_PATH=perlink.exe" >> $env:GITHUB_ENV
+          echo "OS=Windows" >> $env:GITHUB_ENV
+        if: matrix.os == 'windows-latest'
+
+      - name: Get Variables (MacOS)
+        run: |
+          echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+          echo "CLI_PATH=perlink" >> $GITHUB_ENV
+          echo "OS=MacOS" >> $GITHUB_ENV
+        if: matrix.os == 'macos-latest'
+
+      - name: Get Variables (Linux)
+        run: |
+          echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+          echo "CLI_PATH=perlink" >> $GITHUB_ENV
+          echo "OS=Linux-GNU" >> $GITHUB_ENV
+        if: matrix.os == 'ubuntu-latest'
+
+      - name: Upload Binary
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.OS }}-perlink
+          path: target/release/${{ env.CLI_PATH }}
+
+      - name: Update Release
+        # if: github.event_name == 'release'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          file: target/release/${{ env.CLI_PATH }}
+          tag: ${{ github.ref }}
+          overwrite: true
+          asset_name: perlink-${{ env.OS }}-x86_64
+  build-deb:
+    needs: build
+    # if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: Linux-GNU-perlink
+
+
+      - name: Create Package Files
+        run: |
+          mkdir -p .debpkg/usr/bin
+          mkdir -p .rpmpkg/usr/bin
+          chmod +x perlink
+          cp -p perlink .debpkg/usr/bin/
+          cp -p perlink .rpmpkg/usr/bin/
+      - name: Build DEB
+        uses: jiro4989/build-deb-action@v2
+        with:
+          package: ${{ env.NAME }}
+          package_root: .debpkg
+          maintainer: visnkmr
+          version: ${{ github.ref }}
+          arch: "amd64"
+          desc: "${{ env.DESC }}"
+
+      - name: Build RPM
+        uses: jiro4989/build-rpm-action@v2
+        with:
+          summary: "${{ env.DESC }}"
+          package: ${{ env.NAME }}
+          package_root: .rpmpkg
+          maintainer: visnkmr
+          version: ${{ github.ref }}
+          arch: "x86_64"
+          desc: "${{ env.DESC }}"
+
+      - name: Upload DEB Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifact-deb
+          path: |
+            ./*.deb
+      - name: Upload RPM Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifact-rpm
+          path: |
+            ./*.rpm
+            !./*-debuginfo-*.rpm
+      - name: Update Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          file: "{perlink-[!d]*.rpm,*.deb}"
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true  
