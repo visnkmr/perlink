@@ -86,7 +86,7 @@ jobs:
           file: target/release/${{ env.CLI_PATH }}
           tag: ${{ github.ref }}
           overwrite: true
-          release_name: ${{ github.ref }}th release
+          release_name: ${{ env.TAG }}th release
           asset_name: perlink-${{ env.TAG }}-${{ env.OS }}-x86_64
   build-deb:
     permissions:
